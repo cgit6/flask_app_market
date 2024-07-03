@@ -5,12 +5,12 @@ from flask_sqlalchemy import SQLAlchemy
 # 因為這裡產生 circular import
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///data.db'
-print(app.config["SQLALCHEMY_DATABASE_URI"])
-db = SQLAlchemy(app)
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///market.db"
+app.config["SECRET_KEY"] = "fa9920a030e1403f913ee1f7"
+# print(app.config["SQLALCHEMY_DATABASE_URI"])
+db = SQLAlchemy(app) # 初始化 SQLAlchemy
 
-db.init_app(app) 
-with app.app_context():
-    db.create_all()
+
+
 
 from market import routes
