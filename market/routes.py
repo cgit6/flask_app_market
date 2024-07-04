@@ -29,7 +29,7 @@ def market_page():
 
     # 換一種寫法
     if request.method =="POST":
-        # 當使用者送出購買請求
+        # 購買商品的邏輯: 當使用者送出購買請求
         purchased_item = request.form.get("purchased_item")
         p_item_object = Item.query.filter_by(name=purchased_item).first() # 購買的物品的obj
         if p_item_object:
@@ -45,6 +45,24 @@ def market_page():
                 flash(f"購買{p_item_object.name}/{p_item_object.price}$成功",category="success")
             else:
                 flash(f"餘額不足，無法購買 {p_item_object.name}",category="danger")
+        
+        # 賣出商品的邏輯
+
+        sold_item = request.form.get('sold_item')
+        s_item_object = Item.query.filter_by(name=sold_item).first()
+        if s_item_object:
+            # 檢查能不能賣
+            if current_user.can_sell(s_item_object):
+                # 執行賣出，更新資料庫
+                s_item_object.sell(current_user)
+                flash(f"{s_item_object.name},賣出成功",category="success")
+            else:
+                flash(f"{s_item_object.name},賣出失敗，返回市場",category="danger")
+                
+        
+        return redirect(url_for("market_page"))
+
+
     if request.method =="GET":
 
         items = Item.query.filter_by(owner=None)
@@ -52,7 +70,7 @@ def market_page():
         # 利用當前使用者的id 查詢屬於他的物品有哪些
         owned_items = Item.query.filter_by(owner=current_user.id) 
 
-        return render_template('market.html', items=items, purchase_form=purchase_form, owned_items=owned_items)
+        return render_template('market.html', items=items, purchase_form=purchase_form, owned_items=owned_items, selling_form=selling_form)
 
     # # 資料庫中的所有物品
     # items = Item.query.all()

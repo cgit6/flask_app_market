@@ -51,9 +51,12 @@ class User(db.Model, UserMixin):
             return f"{self.budget}$"    
 
     def can_purchase(self, item_obj):
+        # 檢查餘額有沒有大於購買金額
         return self.budget >= item_obj.price
 
-    
+    def can_sell(self, item_obj):
+        # 檢查賣出的物品有沒有存在於當前使用者的已購買清單中，返回布林值
+        return item_obj in self.items
 
 
 # 物品
@@ -74,6 +77,10 @@ class Item(db.Model):
         user.budget -= self.price
         db.session.commit()
 
+    def sell(self, user):
+        self.owner = None
+        user.budget += self.price
+        db.session.commit()
 
         
 # 其他範例
