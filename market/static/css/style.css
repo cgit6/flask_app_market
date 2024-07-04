@@ -3,6 +3,31 @@ body {
   color: antiquewhite;
 }
 
+/* 註冊 */
 .form-register{
   color: antiquewhite;
+}
+
+/* 登入 */
+.form-signin{
+  color: antiquewhite;
+}
+
+/* 使用者餘額 */
+.budget {
+  color: chartreuse;
+  font-weight: bold;
+}
+
+.home-block {
+  color: antiquewhite;
+}
+
+/* 商品葉面 */
+.row{
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.modal-content {
+  background-color: rgb(32, 84, 49)
 }

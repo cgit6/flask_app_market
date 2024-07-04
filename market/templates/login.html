@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+<!-- 名稱 -->
+{% block title %}
+Login
+{% endblock %}
+
+<!-- 內容 -->
+{% block content %}
+
+<body class="text-center">
+    <div class="container">
+        <!-- 控制寬度 -->
+        <form method="POST" class="form-signin">
+            <!-- ??? -->
+            {{ form.hidden_tag() }}
+            <img class="mb-4" src="" alt="Logo">
+            <h1 class="h3 mb-3 fw-normal">
+                登入
+            </h1>
+            <br>
+            {{ form.username.label(class="form-label") }}
+            {{ form.username(class="form-control", placeholder="輸入使用者名稱") }}
+
+            {{ form.password.label(class="form-label") }}
+            {{ form.password(class="form-control", placeholder="輸入密碼") }}
+
+            <br>
+
+            <div class="mb-3">
+                <h6>忘記帳號?</h6>
+                <a class="btn btn-sm btn-secondary" href="{{ url_for('register_page') }}">註冊</a>
+            </div>
+
+            {{ form.submit(class="btn btn-lg btn-primary btn-block") }}
+
+        </form>
+    </div>
+
+</body>
+{% endblock %}

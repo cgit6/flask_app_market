@@ -33,8 +33,15 @@ Register
             {{ form.pwd2(class="form-control", placeholder="輸入確認密碼") }}
 
             <br>
+
+            <div class="checkbox mb-3">
+                <h6>已經有帳號?</h6>
+                <a class="btn btn-sm btn-secondary" href="{{ url_for('login_page') }}">登入</a>
+            </div>
+
             <!-- 送出鈕 -->
             {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
+
 
         </form>
     </div>

@@ -5,3 +5,8 @@ python-dotenv
 pymongo[srv]
 email_validator # 用於驗證
 gunicorn # 只用於 render.com
+
+flask-bcrypt
+flask-wtf
+wtforms
+flask-login
